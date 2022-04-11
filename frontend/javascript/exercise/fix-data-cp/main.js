@@ -24,7 +24,6 @@
  karena jumlah vokal adalah 5, jumlah konsonan adalah 3. Lalu, untuk kedua virus
  yang ditemukan, maka semua karakter virus diubah menjadi 'b'.
 
-
  contoh 2:
  line = 'abcabdueobbb'
 
@@ -36,11 +35,56 @@
 */
 
 function fixData(line) {
-  // TODO: answer here
-}
-
-console.log(fixData('aoi#fdg#ue'))
-console.log(fixData('eh#xyz#oi#'))
-console.log(fixData('#eui#bcl##'))
-
-module.exports = fixData
+   // TODO: answer here
+   var vokal = ["a", "i", "u", "e", "o"];
+   var konsonan = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
+   var virus = ["#"];
+   var konsonanCount = 0;
+   var vokalCount = 0;
+   var virusCount = 0;
+   var result = "";
+   for (var i = 0; i < line.length; i++) {
+     if (vokal.indexOf(line[i]) !== -1) {
+       vokalCount++;
+     } else if (konsonan.indexOf(line[i]) !== -1) {
+       konsonanCount++;
+     } else if (virus.indexOf(line[i]) !== -1) {
+       virusCount++;
+     }
+   }
+   if (vokalCount > konsonanCount) {
+     for (var j = 0; j < line.length; j++) {
+       if (virus.indexOf(line[j]) !== -1) {
+         result += "b";
+       } else {
+         result += line[j];
+       }
+     }
+   }
+   if (vokalCount < konsonanCount) {
+     for (var k = 0; k < line.length; k++) {
+       if (virus.indexOf(line[k]) !== -1) {
+         result += "a";
+       } else {
+         result += line[k];
+       }
+     }
+   }
+   if (vokalCount === konsonanCount) {
+     for (var l = 0; l < line.length; l++) {
+       if (virus.indexOf(line[l]) !== -1) {
+         result += "c";
+       } else {
+         result += line[l];
+       }
+     }
+   }
+   return result;
+ }
+ 
+ console.log(fixData("aoi#fdg#ue"));
+ console.log(fixData("eh#xyz#oi#"));
+ console.log(fixData("#eui#bcl##"));
+ 
+ module.exports = fixData;
+ 
