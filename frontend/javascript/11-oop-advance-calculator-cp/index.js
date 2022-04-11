@@ -16,6 +16,45 @@ class Calculator {
     this.operand = operand;
   }
   // TODO: answer here
+  // TODO: answer here
+  add(operand) {
+    this.operand += operand;
+    return this;
+  }
+
+  subtract(operand) {
+    this.operand -= operand;
+    return this;
+  }
+
+  multiply(operand) {
+    this.operand *= operand;
+    return this;
+  }
+
+  divide(operand) {
+    this.operand /= operand;
+    return this;
+  }
+
+  square(operand) {
+    this.operand = Math.pow(this.operand, operand);
+    return this;
+  }
+
+  squareRoot(operand) {
+    this.operand = Math.sqrt(this.operand);
+    return this;
+  }
+
+  getResult() {
+    return this.operand;
+  }
+
+  reset() {
+    this.operand = 0;
+    return this;
+  }
 }
 
 module.exports = Calculator
