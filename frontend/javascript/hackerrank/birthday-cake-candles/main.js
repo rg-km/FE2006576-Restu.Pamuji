@@ -13,7 +13,15 @@
 
 function birthdayCakeCandles(candles) {
   // Write your code here
-	// TODO: answer here
+  // TODO: answer here
+  var candlesMax = Math.max(...candles);
+  let candlesMaxCount = 0;
+  for (var i = 0; i < candles.length; i++) {
+    if (candles[i] == candlesMax) {
+      candlesMaxCount = candlesMaxCount + 1;
+    }
+  }
+  return candlesMaxCount;
 }
 
 function main() {
@@ -23,9 +31,9 @@ function main() {
   var ar = [3, 2, 1, 3]; // override input
   var result = birthdayCakeCandles(ar);
   console.log(result);
-
 }
 
 main(); // execute program
 
-module.exports = birthdayCakeCandles
+module.exports = birthdayCakeCandles;
+
