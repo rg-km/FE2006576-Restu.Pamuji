@@ -6,7 +6,6 @@ let message = document.getElementsByClassName('message')[0]
 addbtn.addEventListener('click', addCounter)
 subtractbtn.addEventListener('click', subtractCounter)
 
-
 function addCounter() {
   number.innerHTML = parseInt(number.innerHTML) + 1
 }
