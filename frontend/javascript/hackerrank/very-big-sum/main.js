@@ -10,10 +10,10 @@
  */
 
 // Full Problem: https://www.hackerrank.com/challenges/a-very-big-sum/problem
-
 function aVeryBigSum(ar) {
   // Complete this function
   // TODO: answer here
+  return ar.reduce((acc, curr) => acc + curr, 0);
 }
 
 function main() {
@@ -24,4 +24,4 @@ function main() {
 
 main(); // execute program
 
-module.exports = aVeryBigSum
+module.exports = aVeryBigSum;
