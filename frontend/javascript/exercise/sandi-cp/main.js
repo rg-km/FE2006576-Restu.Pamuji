@@ -21,6 +21,8 @@ Lengkapilah function dengan input kata sandi dan output terjemahannya
 
 function terjemahKataSandi(kataSandi) {
   // TODO: answer here
+  var terjemahannya = kataSandi.replace(/ /g, "E").replace(/\+/g, "A").replace(/&/g, "").replace(/%/g, "").replace(/\^/g, "").replace(/#/g, " ").replace(/]/g, ",");
+  return terjemahannya;
 }
 
 
