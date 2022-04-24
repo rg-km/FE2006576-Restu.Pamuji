@@ -21,37 +21,50 @@
  * Gunakan fungsi berikut untuk mempermudah http request.
  */
 
-const https = require("https");
+ const https = require("https");
 
-function getStarWarsData(url) {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        let result = "";
-
-        if (res.statusCode !== 200) {
-          reject(new Error(res.statusCode));
-        }
-
-        res.on("data", (d) => {
-          result += d;
-        });
-
-        res.on("end", () => {
-          resolve(result);
-        });
-      })
-      .on("error", (e) => {
-        reject(e);
-      });
-  });
-}
-
-async function getStarshipModelByCharacterId(id) {
-  // TODO: answer here
-}
-
-
-module.exports = {
-  getStarshipModelByCharacterId
-}
+ function getStarWarsData(url) {
+   return new Promise((resolve, reject) => {
+     https
+       .get(url, (res) => {
+         let result = "";
+ 
+         if (res.statusCode !== 200) {
+           reject(new Error(res.statusCode));
+         }
+ 
+         res.on("data", (d) => {
+           result += d;
+         });
+ 
+         res.on("end", () => {
+           resolve(result);
+         });
+       })
+       .on("error", (e) => {
+         reject(e);
+       });
+   });
+ }
+ 
+ async function getStarshipModelByCharacterId(id) {
+   // TODO: answer here
+   const url = `https://swapi.dev/api/people/${id}/`;
+   const data = await getStarWarsData(url);
+   const character = JSON.parse(data);
+   const starship = character.starships;
+   const starshipModel = [];
+ 
+   for (let i = 0; i < starship.length; i++) {
+     const data = await getStarWarsData(starship[i]);
+     const starshipData = JSON.parse(data);
+     starshipModel.push(starshipData.model);
+   }
+ 
+   return starshipModel;
+ }
+ 
+ 
+ module.exports = {
+   getStarshipModelByCharacterId
+ }
