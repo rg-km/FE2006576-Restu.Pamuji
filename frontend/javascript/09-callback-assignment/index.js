@@ -29,37 +29,48 @@
  *   true: [ { name: 'Tegar', year: 1995, place: 'Depok' } ] }
  */
 
-const input = [
-  {
-    name: 'Adit',
-    year: 1996,
-    place: 'Bogor',
-  },
-  {
-    name: 'Fauzan',
-    year: 1995,
-    place: 'Depok',
-  },
-  {
-    name: 'Vika',
-    year: 1990,
-    place: 'Bandung',
-  },
+ const input = [{
+  name: 'Adit',
+  year: 1996,
+  place: 'Bogor',
+},
+{
+  name: 'Fauzan',
+  year: 1995,
+  place: 'Depok',
+},
+{
+  name: 'Vika',
+  year: 1990,
+  place: 'Bandung',
+},
 ];
 
 const isOdd = (data) => {
-  // TODO: answer here
+// TODO: answer here
+return data.year % 2 === 1;
+
+
 };
 
 const groupBy = (array, callback) => array.reduce(
-  (accumulator, dataValue) => {
-    // TODO: answer here
-  }, {}
+(accumulator, dataValue) => {
+  const key = callback(dataValue);
+  // TODO: answer here
+  if (!accumulator[key]) {
+      accumulator[key] = [];
+  }
+
+  accumulator[key] = accumulator[key] || [];
+  accumulator[key].push(dataValue);
+  return accumulator;
+
+}, {}
 );
 
 console.log(groupBy(input, isOdd))
 
 module.exports = {
-  groupBy,
-  isOdd
+groupBy,
+isOdd
 }
