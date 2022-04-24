@@ -7,8 +7,10 @@
  *
  * Dilarang menggunakan Math.max
  */
-const max = (...args) => {
+ const max = (...args) => {
   // TODO: answer here
+  const max = Math.max(...args);
+  return max;
 };
 
-module.exports = max
+module.exports = max;

@@ -35,8 +35,4 @@ function mostWordsFound(sentences) {
     return 0; // TODO: replace this
   }
   
-  module.exports = {
-    mostWordsFound,
-    countWords,
-  };
-  
+  module.exports = {mostWordsFound,countWords,}
