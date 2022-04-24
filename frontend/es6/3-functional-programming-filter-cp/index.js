@@ -16,6 +16,12 @@
 
 const findAnimal = (bush) => {
   // TODO: answer here
+  return bush
+  .split("")
+  .filter((item) => item.toLowerCase() === item)
+  .join("");
 };
+
+console.log(findAnimal("UkUNFYGaFYFYmNUHbJKHJJiOKDJKDnKFKFLgLLF"));
 
 module.exports = findAnimal
