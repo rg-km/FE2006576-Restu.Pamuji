@@ -13,17 +13,21 @@
 // [1,2,3,4,5] -> [2,3,4,5,1] -> [3,4,5,1,2] -> [4,5,1,2,3] -> [5,1,2,3,4]
 
 function sort(arr) {
-    return arr // TODO: replace this
-}
-
-function rotateLeft(d, arr) {
-    return arr // TODO: replace this
-}
-
-let nums = [4, 5, 2, 1, 3]
-let sorted = sort(nums)
-console.log(sorted)
-rotated = rotateLeft(4, sorted)
-console.log(rotated)
-
-module.exports = { sort, rotateLeft }
+    //return arr // TODO: replace this
+    let sorted = arr.sort((a, b) => a - b);
+    return sorted;
+  }
+  
+  function rotateLeft(d, arr) {
+    //return arr // TODO: replace this
+    let rotated = arr.slice(d).concat(arr.slice(0, d));
+    return rotated;
+  }
+  
+  let nums = [4, 5, 2, 1, 3];
+  let sorted = sort(nums);
+  console.log(sorted);
+  rotated = rotateLeft(4, sorted);
+  console.log(rotated);
+  
+  module.exports = { sort, rotateLeft };
