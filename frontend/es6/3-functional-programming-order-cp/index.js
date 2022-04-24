@@ -9,6 +9,7 @@
 
 function customisableGreeting(user, formatCallback) {
   // TODO: answer here
+  const formattedName = formatCallback(user);
   return `Hi name is ${formattedName}, how are you?`;
 }
 
