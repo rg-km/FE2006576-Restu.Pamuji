@@ -8,6 +8,13 @@
 
 const filterString = (array) => {
   // TODO: answer here
+  let result = [];
+  for (let i = 0; i < array.length; i++) {
+    if (typeof array[i] === "string") {
+      result.push(array[i]);
+    }
+  }
+  return result;
 };
 
 module.exports = filterString
