@@ -11,8 +11,24 @@
  * - Pastikan menggunakan for-of untuk perulangan
  */
 
-const checkOmnipresent = (array, valueToFind) => {
+ const checkOmnipresent = (array, valueToFind) => {
   // TODO: answer here
+  let result = false;
+  const check = [];
+
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array[i].length; j++) {
+      if (array[i][j] === valueToFind) {
+        check.push(array[i][j]);
+      }
+    }
+  }
+  if (check.length === array.length) {
+    result = true;
+  } else {
+    result = false;
+  }
+  return result;
 };
 
-module.exports = checkOmnipresent
+module.exports = checkOmnipresent;
