@@ -30,39 +30,56 @@
  * - Untuk mempermudah perulangan kalian bisa menggunakan perintah Promise.all(), https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
  */
 
-const https = require("https"); // Dibutuhkan sebagai protokol untuk akses data.
+ const https = require("https"); // Dibutuhkan sebagai protokol untuk akses data.
 
-/**
- * Untuk memudahkan kami telah menyiapkan fungsi untuk melakukan request data starwars.
- * Contoh params: https://swapi.dev/api/people/1
- */
-
-function promiseStarWarsData(url) {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        let result = "";
-
-        if (res.statusCode !== 200) {
-          reject(new Error(res.statusCode));
-        }
-
-        res.on("data", (d) => {
-          result += d;
-        });
-
-        res.on("end", () => {
-          resolve(JSON.parse(result));
-        });
-      })
-      .on("error", (e) => {
-        reject(e);
-      });
-  });
-}
-
-function getDataPeopleByIdWithFilms(peopleId) {
-  // TODO: answer here
-}
-
-module.exports = { getDataPeopleByIdWithFilms };
+ /**
+  * Untuk memudahkan kami telah menyiapkan fungsi untuk melakukan request data starwars.
+  * Contoh params: https://swapi.dev/api/people/1
+  */
+ 
+ function promiseStarWarsData(url) {
+   return new Promise((resolve, reject) => {
+     https
+       .get(url, (res) => {
+         let result = "";
+ 
+         if (res.statusCode !== 200) {
+           reject(new Error(res.statusCode));
+         }
+ 
+         res.on("data", (d) => {
+           result += d;
+         });
+ 
+         res.on("end", () => {
+           resolve(JSON.parse(result));
+         });
+       })
+       .on("error", (e) => {
+         reject(e);
+       });
+   });
+ }
+ 
+ function getDataPeopleByIdWithFilms(peopleId) {
+   return promiseStarWarsData(`https://swapi.dev/api/people/${peopleId}`)
+     .then((people) => {
+       const promises = people.films.map((film) => {
+         return promiseStarWarsData(film);
+       });
+ 
+       return Promise.all(promises).then((films) => {
+         return {
+           name: people.name,
+           films: films.map((film) => {
+             return {
+               title: film.title,
+               episode_id: film.episode_id,
+             };
+           }),
+         };
+       });
+     })
+ }
+ 
+ module.exports = { getDataPeopleByIdWithFilms };
