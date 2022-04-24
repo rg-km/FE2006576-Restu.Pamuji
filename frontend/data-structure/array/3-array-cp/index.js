@@ -16,16 +16,26 @@
 function mostWordsFound(sentences) {
     let max = 0;
     for (let i = 0; i < sentences.length; i++) {
-        let count = countWords(sentences[i]);
-        // TODO: answer here
+      let count = countWords(sentences[i]);
+      // TODO: answer here
+      if (count > max) {
+        max = count;
+      }
     }
-    return max
-}
-
-function countWords(sentence) {
+    return max;
+  }
+  
+  function countWords(sentence) {
+    let count = 0;
+    let words = sentence.split(" ");
+    for (let i = 0; i < words.length; i++) {
+      count++;
+    }
+    return count;
     return 0; // TODO: replace this
-}
-
-module.exports = {
-    mostWordsFound, countWords
-}
+  }
+  
+  module.exports = {
+    mostWordsFound,
+    countWords,
+  };
