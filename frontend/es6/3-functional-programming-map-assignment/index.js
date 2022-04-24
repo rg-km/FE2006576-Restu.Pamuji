@@ -24,6 +24,19 @@
 
 const returnUserAverageScore = (students) => {
   // TODO: answer here
+  let result = [];
+  for (let i = 0; i < students.length; i++) {
+    let sum = 0;
+    for (let j = 0; j < students[i].nilai.length; j++) {
+      sum += students[i].nilai[j];
+    }
+    let average = Math.round(sum / students[i].nilai.length);
+    result.push({
+      name: students[i].name,
+      rataNilai: average,
+    });
+  }
+  return result;
 };
 
 module.exports = returnUserAverageScore
