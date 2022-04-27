@@ -1,38 +1,53 @@
-// Kalimat adalah daftar kata yang dipisahkan oleh satu spasi tanpa spasi awal atau akhir.
-// Kita diberikan serangkaian string dengan nama sentences, di mana setiap sentences[i] mewakili satu kalimat.
-// Kembalikan jumlah maksimum kata yang muncul dalam satu kalimat.
+// Mengecek jika dua string adalah anagram
+// Anagram adalah kata yang dibentuk melalui penataan ulang huruf-huruf dari beberapa kata lain.
 //
 // Contoh 1
-// Input: sentences = ["Andi suka bermain bola", "Saya sedang belajar struktur data", "Terima kasih"]
-// Output: 5
-// Explanation: jumlah kata terbanyak ada di "Saya sedang belajar struktur data", karena terdapat 5 kata dibandingkan kalimat lainnya, 4 dan 2 kata
+// Input: a = "keen", b = "knee"
+// Output: "Anagram"
+// Explanation: Jika ditata, "knee" dan "keen" memiliki huruf-huruf yang sama, hanya berbeda urutan
 //
 // Contoh 2
-// Input: sentences = ["Andi suka bermain bola", "Budi suka bermain basket", "Terima kasih"]
-// Output: 4
-// Explanation: jumlah kata terbanyak ada di "Andi suka bermain bola" dan "Budi suka bermain basket", karena terdapat 4 kata dibandingkan kalimat lainnya, 2 kata
-// Ada kemungkinan bahwa beberapa kalimat mengandung jumlah kata yang sama.
+// Input: a = "fried", b = "fired"
+// Output: "Anagram"
+// Explanation: Jika ditata, "fried" dan "fired" memiliki huruf-huruf yang sama, hanya berbeda urutan
+//
+// Contoh 3
+// Input: a = "apple", b = "paddle"
+// Output: "Bukan Anagram"
+// Explanation: Jika ditata, "apple" dan "paddle" memiliki huruf-huruf yang berbeda
 
-function mostWordsFound(sentences) {
-    let max = 0;
-    for (let i = 0; i < sentences.length; i++) {
-      let count = countWords(sentences[i]);
-      // TODO: answer here
-      if (count > max) {
-        max = count;
-      }
-    }
-    return max;
+function anagramChecker(str1, str2) {
+  //return true; // TODO: replace this
+  if (str1.length !== str2.length) {
+    return false;
   }
-  
-  function countWords(sentence) {
-    let count = 0;
-    let words = sentence.split(" ");
-    for (let i = 0; i < words.length; i++) {
-      count++;
+  let hash = {};
+  for (let i = 0; i < str1.length; i++) {
+    if (hash[str1[i]]) {
+      hash[str1[i]] += 1;
+    } else {
+      hash[str1[i]] = 1;
     }
-    return count;
-    return 0; // TODO: replace this
   }
-  
-  module.exports = {mostWordsFound,countWords,}
+  for (let i = 0; i < str2.length; i++) {
+    if (hash[str2[i]]) {
+      hash[str2[i]] -= 1;
+    } else {
+      hash[str2[i]] = 1;
+    }
+  }
+  for (let key in hash) {
+    if (hash[key] !== 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(anagramChecker("keen", "knee"));
+console.log(anagramChecker("kee", "knn"));
+console.log(anagramChecker("fried", "fired"));
+
+module.exports = {
+  anagramChecker,
+};
