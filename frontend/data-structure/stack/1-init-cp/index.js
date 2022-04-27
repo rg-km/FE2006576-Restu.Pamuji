@@ -1,5 +1,4 @@
-// Dari contoh yang telah diberikan, cobalah untuk membuat stack yang memiliki jumlah maksimal elemen sebanyak 10 dengan menambahkan atribut size.
-// Gunakan array untuk menyimpan data pada stack. Pada kasus ini, data yang disimpan berupa integer.
+// Dari inisiasi stack dengan jumlah maksimal elemen 10, cobalah implementasikan operasi push.
 
 module.exports = class Stack {
     constructor() {
@@ -8,5 +7,12 @@ module.exports = class Stack {
       this.size = 10;
       this.top = -1;
     }
-  };
   
+    push(elemen) {
+      // TODO: answer here
+      if (this.top == this.size - 1) {
+        throw "stack overflow";
+      }
+      this.data[(this.top += 1)] = elemen;
+    }
+  };
