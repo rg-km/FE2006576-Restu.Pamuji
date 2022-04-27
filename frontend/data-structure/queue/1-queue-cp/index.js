@@ -36,13 +36,36 @@
 // Jadi semua siswa yang tidak bisa makan sandwich adalah 3 orang.
 
 function countStudentsCantEat(students, sandwiches) {
-	return 0 // TODO: replace this
-}
-
-console.log(countStudentsCantEat([1,1,1,0,0,1], [1,0,0,0,1,1])); // 3
-console.log(countStudentsCantEat([1,1,0,0], [0,1,0,1])); // 0
-
-module.exports = {
-    countStudentsCantEat
-}
-
+    while (true) {
+      let anyStudent = false;
+      let queue = students;
+  
+      console.log("qu", queue);
+  
+      let requeueStudents = [];
+      console.log("reque", requeueStudents);
+      while (queue.length > 0) {
+        let frontStudent = queue.shift();
+        console.log("front", frontStudent);
+        if (sandwiches[0] == frontStudent) {
+          sandwiches.shift();
+          anyStudent = true;
+          console.log("sand", sandwiches);
+        } else {
+          requeueStudents.push(frontStudent);
+        }
+      }
+      students = requeueStudents;
+      if (!anyStudent) break;
+    }
+    return students.length;
+  }
+  
+  //return 0; // TODO: replace this
+  
+  console.log(countStudentsCantEat([1, 1, 1, 0, 0, 1], [1, 0, 0, 0, 1, 1])); // 3
+  console.log(countStudentsCantEat([1, 1, 0, 0], [0, 1, 0, 1])); // 0
+  
+  module.exports = {
+    countStudentsCantEat,
+  };
