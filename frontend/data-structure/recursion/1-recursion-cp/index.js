@@ -16,12 +16,28 @@
 
 function myPow(x, n) {
     if (n === 0) return 1;
-    
+  
     let pow = Math.abs(n);
-    
+  
     // TODO: answer here
-    
+    if (x === 0) return 0;
+    if (n === 1) return x;
+    if (n === -1) return 1 / x;
+    if (n === 2) return x * x;
+    if (n === -2) return 1 / (x * x);
+  
     // TODO: answer here
-}
-
-module.exports = { myPow }
+    let result = x;
+    let i = 1;
+    while (i < pow) {
+      result *= x;
+      i++;
+    }
+    if (n < 0) {
+      result = 1 / result;
+    }
+    return result;
+  }
+  
+  module.exports = { myPow };
+  
