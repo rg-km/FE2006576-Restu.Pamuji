@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const Item = (props) => {
-  const { id, image, title } = props;
   // TODO: answer here
+  const { id, image, title, total, setTotal, showAlert } = props
   const [item, setItem] = React.useState(0);
 
   return(
@@ -13,26 +13,28 @@ export const Item = (props) => {
         <button
         aria-label={`minus-button-${id}`}
         onClick={()=>{
-          setItem(item - 1);
-          for(let i = 0; i < item; i++){
-            if (item === 0){
-              setItem(0);
-            }
+          // TODO: answer here
+          let currentItem = item
+          let currentTotal = total
+          if (item > 0) {
+            setItem(currentItem -= 1)
+            setTotal(currentTotal -= 1)
           }
-        // TODO: answer here
         }}
         >-</button>
         <input type="text" aria-label={`item-${id}`} className={`item-${id}`} value={item} disabled></input>
         <button
         aria-label={`add-button-${id}`}
         onClick={()=>{
-          setItem(item + 1);
-          for(let i = 0; i < item; i++){
-            if (item > 10){
-              setItem(0);
-            }
-          }
           // TODO: answer here
+          let currentItem = item
+          let currentTotal = total
+          if (item >= 10) {
+            showAlert(true)
+          } else {
+            setItem(currentItem += 1)
+            setTotal(currentTotal += 1)
+          }
         }}
         >+</button>
       </div>
@@ -43,8 +45,8 @@ export const Item = (props) => {
 
 function App() {
   //Add state for total 
-  const [total, setTotal] = React.useState(0);
   // TODO: answer here
+  const [total, setTotal] = React.useState(0);
  
   const dataDummy = [
     {
@@ -76,7 +78,7 @@ function App() {
       <div className='box-container'>
           {dataDummy.map((element, index) => (
             // TODO: answer here
-            <Item key={index} id={element.id} image={element.image} title={element.title} />
+            <Item key={index} id={element.id} image={element.image} title={element.title} total={total} setTotal={setTotal} showAlert={showAlert} />
           ))}
       </div>
       <div className='end-section'>
