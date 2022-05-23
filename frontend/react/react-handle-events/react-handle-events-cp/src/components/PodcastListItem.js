@@ -4,6 +4,9 @@ import '../components/PodcastListItem.css';
 
 const PodcastListItem = ({ id, podcastItem, setFormModalType, setShowFormModal, setPodcastId }) => {
   const onClickUpdateBtn = () => {
+    setFormModalType("UPDATE");
+    setShowFormModal(true);
+    setPodcastId(id);
     // TODO: answer here
   }
   return (
