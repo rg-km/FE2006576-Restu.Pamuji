@@ -19,24 +19,57 @@ const PodcastFormModal = (props) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
     // TODO: answer here
   };
 
   const handleFormSubmit = async () => {
+    const { title, duration, publisher, summary, imageUrl } = formValues;
+    const data = {
+      title,
+      duration,
+      publisher,
+      summary,
+      imageUrl,
+    };
+    if (formModalType === "ADD") {
+      const response = await axios.post(Constants.API_URL, data);
+      const newPodcastList = [...podcastList, response.data];
+      setPodcastList(newPodcastList);
+    } else {
+      const response = await axios.put(
+        `${Constants.API_URL}/${podcastId}`,
+        data
+      );
+      const newPodcastList = podcastList.map((podcast) => {
+        if (podcast.id === podcastId) {
+          return response.data;
+        }
+        return podcast;
+      });
+      setPodcastList(newPodcastList);
+    }
     // TODO: answer here
   };
 
   const onCloseModal = () => {
+    setShowFormModal(false);
     // TODO: answer here
   };
 
   const getPodcastById = async () => {
+    const response = await axios.get(`${Constants.API_URL}/${podcastId}`);
+    const { title, duration, publisher, summary, imageUrl } = response.data;
+    setFormValues({ title, duration, publisher, summary, imageUrl });
     // TODO: answer here
   };
 
   useEffect(() => {
+    if (formModalType === "UPDATE") {
+      getPodcastById();
+    }
     // TODO: answer here
-  }, [showFormModal]);
+  }, [showFormModal, formModalType]);
 
   return (
     <Modal show={showFormModal} onHide={onCloseModal}>
