@@ -6,17 +6,19 @@ import BackButton from "../components/BackButton";
 const MovieDetail = () => {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { id } = useParams();
   // TODO: answer here
   const controller = new AbortController();
 
   const loadDetail = async () => {
     setLoading(true);
     try {
-      const url = /* beginanswer */ "https://swapi.dev/api/films/" + id; /* endanswer "" */
-      const { data } = await axios.get(url, {
+      const url = /* beginanswer / "https://swapi.dev/api/films/" + id; / endanswer "" */
+      { data } = await axios.get(url, {
         signal: controller.signal,
       });
       // TODO: answer here
+      setDetail(data);
     } catch (error) {
       console.log(error);
     }
@@ -25,6 +27,7 @@ const MovieDetail = () => {
 
   useEffect(() => {
     // TODO: answer here
+    loadDetail();
     return () => {
       controller.abort();
     };
