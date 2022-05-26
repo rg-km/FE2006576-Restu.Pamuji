@@ -8,6 +8,15 @@ const Header = ({text}) =>{
     const renderTheme = (theme) =>{
         //mengubah warna dari Header berdasarkan theme
         // TODO: answer here
+        try{
+            if(theme === 'light'){
+                return styles['light-theme'];
+            }else{
+                return styles['dark-theme'];
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return(

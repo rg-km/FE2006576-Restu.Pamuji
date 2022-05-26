@@ -1,39 +1,27 @@
-import styles from './Card.module.scss';
+import styles from './dropdown.module.scss';
 import { useContext } from 'react';
 import { LanguageContext } from '../../App';
 
-const Card = () =>{
-    //buatlah variable untuk mengambil context dari text
+const Dropdown = () =>{
+    //buatlah variable untuk mengimport context text dan setLanguage
     // TODO: answer here
+    const { text, setLanguage } = useContext(LanguageContext);
+    const handleSelectValueChange = (value) =>{
+        //gunakanlah method ini untuk mengubah context language
+        // TODO: answer here
+        setLanguage(value);
+    }
+
     return(
-        <div className={styles['card']}>
-            <div className={styles['card-image']}>
-            </div>
-            <div className={styles['card-content']}>
-                <div className={styles['card-title']}>
-                    <p data-testid='headline'>{text.headline}</p>
-                </div>
-                <div className={styles['card-description']}>
-                    <p>{text.description}
-                    </p>
-                </div>
-                <div className={styles['card-data__group']}>
-                    <div className={styles['card-data']}>
-                        <p>10K+</p>
-                        <p>{text.companies}</p>
-                    </div>
-                    <div className={styles['card-data']}>
-                        <p>314</p>
-                        <p>{text.templates}</p>
-                    </div>
-                    <div className={styles['card-data']}>
-                        <p>12M+</p>
-                        <p>{text.queries}</p>
-                    </div>
-                </div>
-            </div>
+        <div className={styles['dropdown']}>
+            <label htmlFor='language'>{text.changeLanguage} : </label>
+            <select data-testid='dropdown' name="language" onChange={(e)=>{handleSelectValueChange(e.target.value)}}>
+                <option value="english">{text.englishLanguage}</option>
+                <option value="indonesian">{text.indonesianLanguage}</option>
+                <option value="spanish">{text.spanishLanguage}</option>
+            </select>
         </div>
     )
 }
 
-export default Card;
+export default Dropdown;
