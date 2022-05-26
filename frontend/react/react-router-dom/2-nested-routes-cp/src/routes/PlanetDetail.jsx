@@ -7,16 +7,18 @@ const PlanetDetail = () => {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(false);
   // TODO: answer here
+  const { id } = useParams();
   const controller = new AbortController();
 
   const loadDetail = async () => {
     setLoading(true);
     try {
-      const url = /* beginanswer */ "https://swapi.dev/api/planets/" + id; /* endanswer "" */
-      const { data } = await axios.get(url, {
+      const url = /* beginanswer / "https://swapi.dev/api/planets/" + id; / endanswer "" */
+      { data } = await axios.get(url, {
         signal: controller.signal,
       });
       // TODO: answer here
+      setDetail(data);
     } catch (error) {
       console.log(error);
     }
@@ -25,6 +27,7 @@ const PlanetDetail = () => {
 
   useEffect(() => {
     // TODO: answer here
+    loadDetail();
     return () => {
       controller.abort();
     };
