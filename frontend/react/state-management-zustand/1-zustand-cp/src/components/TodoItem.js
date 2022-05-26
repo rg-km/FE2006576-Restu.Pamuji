@@ -1,8 +1,9 @@
-import useTodoStore from "../store/todoStore"
-import { HStack, Text, Button } from "@chakra-ui/react"
+import useTodoStore from "../store/todoStore";
+import { HStack, Text, Button } from "@chakra-ui/react";
 
 export default function TodoItem({ id, text, isDone }) {
   // TODO: answer here
+  const { removeTodo, toggleTodo } = useTodoStore();
 
   return (
     <HStack justify="space-between" width="full">
@@ -16,24 +17,22 @@ export default function TodoItem({ id, text, isDone }) {
           aria-label="delete-todo-button"
           backgroundColor="red.100"
           onClick={() => {
-            removeTodo(id)
+            removeTodo(id);
           }}
         >
           Delete
         </Button>
         <Button
           size="xs"
-          aria-label={
-            isDone ? "toggle-todo-undone-button" : "toggle-todo-done-button"
-          }
+          aria-label={isDone ? "toggle-todo-undone-button" : "toggle-todo-done-button"}
           backgroundColor={isDone ? "yellow.300" : "green.300"}
           onClick={() => {
-            toggleTodo(id)
+            toggleTodo(id);
           }}
         >
           {isDone ? "Undo" : "Done"}
         </Button>
       </HStack>
     </HStack>
-  )
+  );
 }
