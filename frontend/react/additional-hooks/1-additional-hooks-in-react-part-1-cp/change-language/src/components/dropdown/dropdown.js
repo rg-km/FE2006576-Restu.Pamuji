@@ -1,25 +1,37 @@
-import styles from './dropdown.module.scss';
-import { useContext } from 'react';
-import { LanguageContext } from '../../App';
+import './styles/global.scss';
+import Container from './components/container/Container';
+import Card from './components/card/Card';
+import { indonesianText, englishText, spanishText} from './constant/text';
+import { createContext, useEffect, useState} from 'react';
 
-const Dropdown = () =>{
-    //buatlah variable untuk mengimport context text dan setLanguage
-    // TODO: answer here
-    const handleSelectValueChange = (value) =>{
-        //gunakanlah method ini untuk mengubah context language
+export const LanguageContext = createContext();
+const App = () =>{
+    const [language, setLanguage] = useState("indonesian");
+    const [text, setText] = useState(indonesianText);
+
+    useEffect(()=>{
+        //useEffect ini digunakan untuk mendetect perubahan language. bila ada perubahan language lakukan pula perubahan
+        //state text.
+        if(language === "indonesian"){
+            setText(indonesianText);
+        }else if(language === "english"){
+            setText(englishText);
+        }else if(language === "spanish"){
+            setText(spanishText);
+        }
         // TODO: answer here
-    }
+    }, [language])
 
     return(
-        <div className={styles['dropdown']}>
-            <label htmlFor='language'>{text.changeLanguage} : </label>
-            <select data-testid='dropdown' name="language" onChange={(e)=>{handleSelectValueChange(e.target.value)}}>
-                <option value="english">{text.englishLanguage}</option>
-                <option value="indonesian">{text.indonesianLanguage}</option>
-                <option value="spanish">{text.spanishLanguage}</option>
-            </select>
-        </div>
+        <LanguageContext.Provider value={{
+            text: text,
+            setLanguage: setLanguage
+        }}>
+            <Container>
+                <Card/>
+            </Container>
+        </LanguageContext.Provider>
     )
 }
 
-export default Dropdown;
+export default App;
